@@ -1,38 +1,21 @@
-#https://www.acmicpc.net/problem/10845
-
-import sys
-from collections import deque
+#https://www.acmicpc.net/problem/17298
 
 N = int(input())
+As = list(map(int, input().split()))
 
-dq = deque()
-commands = []
+results = []
 
-for _ in range(N):
-    commands.append(list(sys.stdin.readline().strip().split()))
+def NGE(index):
+    global As
+    target = As[index]
+    for i in range(index+1,N):
+        if As[i] > target:
+            results.append(As[i])
+            return
+    results.append(-1)
 
-for command in commands:
-    if command[0] == "push":
-        dq.append(command[1])
-    elif command[0] == "pop":
-        if len(dq) == 0:
-            print(-1)
-            continue
-        print(dq.popleft())
-    elif command[0] == "size":
-        print(len(dq))
-    elif command[0] == "empty":
-        if len(dq) == 0:
-            print(1)
-        else:
-            print(0)
-    elif command[0] == "front":
-        if len(dq) == 0:
-            print(-1)
-        else:
-            print(dq[0])
-    elif command[0] == "back":
-        if len(dq) == 0:
-            print(-1)
-        else:
-            print(dq[len(dq)-1])
+for i in range(len(As)):
+    NGE(i)
+
+for result in results:
+    print(result, end=" ")

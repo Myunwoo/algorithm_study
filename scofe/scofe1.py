@@ -6,8 +6,6 @@ for _ in range(N):
     start, to, end = input().split()
     arr.append((start,end))
 
-
-
 #시작 시간이 가장 늦은 일정
 arr.sort(key=lambda x:x[0],reverse=True)
 first = arr[0]

@@ -1,14 +1,26 @@
-#https://www.acmicpc.net/problem/2437
-
 N = int(input())
-plumbs = list(map(int, input().split()))
 
-plumbs.sort()
+moves = list(input().split())
 
-target = 1
-for plumb in plumbs:
-    if target < plumb:
-        break
-    target += plumb
+pos =[0,0]
 
-print(target)
+for move in moves:
+    if move == 'R':
+        if (pos[0] + 1) >= N:
+            continue
+        pos[0] += 1
+    elif move == 'L':
+        if (pos[0] - 1) < 0:
+            continue
+        pos[0] -= 1
+    elif move == 'U':
+        if (pos[1] - 1) < 0:
+            continue
+        pos[1] -= 1
+    
+    elif move == 'D':
+        if (pos[1] + 1) >= N:
+            continue
+        pos[1] += 1
+
+print(str(pos[1]+1) + " " + str(pos[0]+1))

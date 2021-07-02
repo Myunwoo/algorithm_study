@@ -23,7 +23,6 @@ def wave(num):
             P[num] = wave(num-1) + wave(num-5)
         return P[num]
 
-
 Ns = []
 
 for _ in range(T):

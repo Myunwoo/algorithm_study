@@ -1,30 +1,26 @@
-#https://www.acmicpc.net/problem/11724
+#https://www.acmicpc.net/problem/2842
 
-import sys
+from collections import deque
 
-N, M = map(int, sys.stdin.readline().strip().split())
-graph = [[] for _ in range(N+1)]
-visited = [False for _ in range(N+1)]
+N = int(input())
+graph = []
+costs = []
+results = []
 
-for _ in range(M):
-    n1, n2 = map(int, sys.stdin.readline().strip().split())
-    graph[n1].append(n2)
-    graph[n2].append(n1)
+for _ in range(N):
+    graph.append(list(input()))
+for _ in range(N):
+    costs.append(list(map(int,input().split())))
 
-def dfs(start):
-    global graph
-    global visited
-    visited[start] = True
-    for node in graph[start]:
-        if visited[node] == False:
-            dfs(node)
+dx = [-1, 1, 0, 0, -1, 1, -1, 1]
+dy = [0, 0, -1, 1, -1, 1, 1, -1]
+
+for i in range(N):
+    for j in range(N):
+        if graph[i][j] == 'P':
+            bfs(i,j)
+
+def bfs(x, y):
+    global graph, costs, results
+    global dx, dy
     
-
-count = 0
-
-for i in range(1, N+1):
-    if visited[i] == False:
-        dfs(i)
-        count += 1
-
-print(count)

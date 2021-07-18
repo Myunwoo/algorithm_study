@@ -1,17 +1,10 @@
-#https://www.acmicpc.net/problem/1261
+#https://www.acmicpc.net/problem/9376
 import sys
-from heapq import heappush, heappop
-M, N = map(int, sys.stdin.readline().split())
-graph = []
-for i in range(N):
-    graph.append(list(sys.stdin.readline().strip()))
+from collections import deque
 
-costs=[[0 for _ in range(M)] for _ in range(N)]
-heap=[]
-
-dx=[-1, 1, 0, 0]
-dy=[0, 0, -1, 1]
-
-def dijkstra():
-    global graph, costs, heap, dx, dy
-    
+t=int(sys.stdin.readline())
+for _ in range(t):
+    graph=[]
+    h, w = map(int, sys.stdin.readline().split())
+    for _ in range(h):
+        

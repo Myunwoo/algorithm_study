@@ -1,6 +1,5 @@
+#https://programmers.co.kr/learn/courses/30/lessons/42587
 from collections import deque
-
-
 def solution(priorities, location):
     answer = 0
     
@@ -9,7 +8,9 @@ def solution(priorities, location):
         dq.append(priorities[i])
         if i == location:
             dq.append(-1)
-
+    
+    print(dq)
+    print(dq[0])
             
     count = 0
     
@@ -29,9 +30,5 @@ def solution(priorities, location):
             if dq[0] == -1:
                 answer = count
                 break
-        print(dq)
             
     return answer
-
-
-print(solution([1,1,9,1,1,1], 0))

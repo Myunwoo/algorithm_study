@@ -4,7 +4,6 @@ N=int(input())
 K=int(input())
 sensors=list(map(int, input().split()))
 
-
 if K >= N:
     print(0)
     sys.exit()

@@ -13,6 +13,7 @@ for _ in range(T):
 
     cost=1
     while len(slimes)>1:
+        #스웩;
         a=heappop(slimes)
         b=heappop(slimes)
         cost*=a*b

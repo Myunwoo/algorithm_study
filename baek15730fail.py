@@ -4,61 +4,51 @@ from collections import deque
 
 N,M=map(int, sys.stdin.readline().split())
 graph=[]
-water=[[0 for _ in range(M)] for _ in range(N)]
 for _ in range(N):
     graph.append(list(map(int, sys.stdin.readline().strip().split())))
 
-top=0
-for i in range(N):
-    for j in range(M):
-        if top<graph[i][j]:
-            top=graph[i][j]
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
 
-dx=[1,-1,0,0]
-dy=[0,0,1,-1]
-
-def bfs(i,j,visited):
-    global graph,water,dx,dy
-    level=graph[i][j]
-    dq=deque()
-    dq.append([i,j])
-    results=[]
-    while dq:
-        cur_x,cur_y=dq.popleft()
-        visited[cur_x][cur_y]=True
-        results.append([cur_x,cur_y])
-        for i in range(4):
-            new_x=cur_x+dx[i]
-            new_y=cur_y+dy[i]
-            #맵 바깥이 나오면 물이 고일 수 없음
-            if new_x<0 or new_y<0 or new_x>=N or new_y>=M:
-                return []
-            #현재 목표보다 낮은 지형이 나오면 물이 고일 수 없음
-            if graph[new_x][new_y] < level:
-                return []
-            #같은 높이의 지형이 나오면 탐색
-            if graph[new_x][new_y]==level and not visited[new_x][new_y]:
-                dq.append([new_x,new_y])
-    return results
-
-
-def watering(level):
-    global graph
+count=0
+def bfs(x,y,l):
+    global N,M,graph,count,dx,dy
     visited=[[False for _ in range(M)] for _ in range(N)]
+    dq=deque()
+    dq.append([x,y])
+    while dq:
+        cx,cy=dq.popleft()
+        visited[cx][cy]=True
+        for i in range(4):
+            nx=cx+dx[i]
+            ny=cy+dy[i]
+            #x,y가 맵의 가장자리인 경우 물 못채움
+            if nx<0 or ny<0 or nx>=N or ny>=M:
+                return
+                #방문한 적이 없는 칸 중
+            if not visited[nx][ny]:
+                #목표와 같은 높이의 칸이 인접해 있다면 전이
+                if graph[nx][ny]==l:
+                    dq.append([nx,ny])
+                #목표보다 낮은 칸이 인접해 있다면 물을 채울 수 없음
+                elif graph[nx][ny]<l:
+                    return
+    #주변이 자신보다 높고, 가장자리에 위치하지 않은 칸들의 목록이 target에 저장됨.
     for i in range(N):
         for j in range(M):
-            #방문한 적이 없는 목표 높이에 물채우기
-            if graph[i][j]==level and not visited[i][j]:
-                results=bfs(i,j,visited)
-                for r in results:
-                    graph[r[0]][r[1]]+=1
-                    water[r[0]][r[1]]+=1
+            if visited[i][j]:
+                graph[i][j]+=1
+                count+=1
 
-for level in range(top):
-    watering(level)
 
-s=0
-for i in range(N):
-    for j in range(M):
-        s+=water[i][j]
-print(s)
+level=0
+#0부터 10000까지 돌며 물을 채울 것
+while level<10001:
+    for i in range(N):
+        for j in range(M):
+            #현재 물을 채워야 할 칸에 대하여 bfs를 수행
+            if graph[i][j]==level:
+                bfs(i,j,level)
+    level+=1
+
+print(count)

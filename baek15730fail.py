@@ -13,7 +13,10 @@ dy=[0,0,-1,1]
 count=0
 def bfs(x,y,l):
     global N,M,graph,count,dx,dy
+    #방문 처리를 하기 위해서
     visited=[[False for _ in range(M)] for _ in range(N)]
+    #물을 채우기 위해서(방문 처리 2차원 배열을 사용하면 N*M 시간이 추가로 발생하므로)
+    targets=[[x,y]]
     dq=deque()
     dq.append([x,y])
     while dq:
@@ -30,15 +33,14 @@ def bfs(x,y,l):
                 #목표와 같은 높이의 칸이 인접해 있다면 전이
                 if graph[nx][ny]==l:
                     dq.append([nx,ny])
+                    targets.append([nx,ny])
                 #목표보다 낮은 칸이 인접해 있다면 물을 채울 수 없음
                 elif graph[nx][ny]<l:
                     return
     #주변이 자신보다 높고, 가장자리에 위치하지 않은 칸들의 목록이 target에 저장됨.
-    for i in range(N):
-        for j in range(M):
-            if visited[i][j]:
-                graph[i][j]+=1
-                count+=1
+    for t in targets:
+        graph[t[0]][t[1]]+=1
+        count+=1
 
 
 level=0

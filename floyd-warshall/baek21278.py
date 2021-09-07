@@ -7,6 +7,7 @@ for _ in range(M):
     graph[A-1][B-1]=1
     graph[B-1][A-1]=1
 
+#모든 점으로부터 모든 점까지의 최단거리
 for k in range(N):
     for i in range(N):
         for j in range(N):
@@ -24,6 +25,8 @@ for i in range(N-1):
         s=0
         #k 로부터 치킨집(i,j)까지의 거리 중 최소인 녀석을 합계에 더함
         for k in range(N):
+            if k==i or k==j:
+                continue
             s+=min(graph[k][i],graph[k][j])
         if m>s:
             m=s

@@ -18,7 +18,7 @@ for k in range(N):
             else:
                 graph[i][j]=min(graph[i][j], graph[i][k]+graph[k][j])
 
-results=[[] for _ in range(6)]
+results=[[] for _ in range(N+1)]
 for i in range(len(graph)):
     m=max(graph[i])
     if m==sys.maxsize:

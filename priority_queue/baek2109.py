@@ -19,4 +19,5 @@ for course in courses:
     if course[1] < len(heap):
         heapq.heappop(heap)
 
+
 print(sum(heap))

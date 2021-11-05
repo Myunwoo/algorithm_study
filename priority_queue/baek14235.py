@@ -21,3 +21,4 @@ for _ in range(N):
 
 for r in results:
     print(r)
+    

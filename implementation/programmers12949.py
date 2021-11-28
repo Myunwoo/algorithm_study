@@ -11,5 +11,4 @@ def solution(arr1, arr2):
                 answer[i][j]+=(a[x]*b[x])
             b=[]
         
-
     return answer

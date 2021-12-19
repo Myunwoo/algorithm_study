@@ -30,7 +30,7 @@ def move(curX,curY,moveArr):
             if newX==king[0] and newY==king[1]:
                 return [-1,-1]
         #도착지점에 대한 확인
-        if i==2:
+        elif i==2:
             #첫 방문일 때, 왕일 때만 도착지점 리턴
             if graph[newX][newY]==-1:
                 return [newX,newY]

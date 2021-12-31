@@ -35,3 +35,5 @@ def bfs():
 bfs()
 for r in results:
     print(r)
+
+graph.__contains__

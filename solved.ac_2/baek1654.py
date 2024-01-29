@@ -1,16 +1,16 @@
 import sys
-input = sys.stdin.readline
-K, N = list(map(int, input().split()))
-arr = [int(input()) for _ in range(K)]
+K, N = map(int, input().split())
+arr = [int(sys.stdin.readline()) for _ in range(K)]
+start, end = 1, max(arr)
 
-m = max(arr)
-count = 0
-while True:
-  count = 0
-  for a in arr:
-    count += (a // m)
-  if count == N:
-    break
-  m -= 1
-
-print(m)
+while start <= end:
+    mid = (start + end) // 2
+    count = 0
+    for i in arr:
+        count += i // mid
+        
+    if count >= N:
+        start = mid + 1
+    else:
+        end = mid - 1
+print(end)

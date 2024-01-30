@@ -1,27 +1,27 @@
 import sys
 input = sys.stdin.readline
-
 n = int(input())
-arr = [int(input()) for _ in range(n)]
-num = []
-answer = []
+arr = []
 count = 1
+answer = []
+right = True
 
-for a in arr:
-    if not num:
-        num.append(count)
-        count += 1
-        answer.append('+')
+for _ in range(n):
+    cur = int(input())
+    if not right:
         continue
-    if num[-1] > a:
-        answer = ['NO']
-        break
-    while num[-1] < a:
-        num.append(count)
+    while count <= cur:
+        arr.append(count)
         count += 1
         answer.append('+')
-    num.pop()
-    answer.append('-')
-            
-    print('num', num)
-    print('answer', answer)
+    if arr[-1] == cur:
+        arr.pop()
+        answer.append('-')
+    else:
+        right = False
+
+if right:
+    for a in answer:
+        print(a)
+else:
+    print('NO')

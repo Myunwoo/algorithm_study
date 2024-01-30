@@ -6,14 +6,14 @@ M = int(sys.stdin.readline())
 start, end = 0, max(arr)
 answer = -1
 
-while start<end:
-    mid = (end-start)//2 - 1
+while start<=end:
+    mid = (end+start)//2
     count = 0
     for a in arr:
-        if mid > a:
-            count += a
-        else:
+        if a > mid:
             count += mid
+        else:
+            count += a
     
     if count < M:
         start = mid+1

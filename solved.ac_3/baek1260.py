@@ -28,13 +28,24 @@ def bfs(graph, V, bfsVisited):
   dq.append(V)
   while dq:
     cur = dq.popleft()
-    for i, g in enumerate(graph[V]):
+    for i, g in enumerate(graph[cur]):
       if g == True and not bfsVisited[i]:
+        dq.append(i)
         bfsVisited[i] = True
         bfsAnswer.append(i+1)
         
 
 bfsAnswer.append(V)
 bfsVisited[V-1] = True
-bfs(graph, V, bfsVisited)
-print(bfsVisited)
+bfs(graph, V-1, bfsVisited)
+
+for i in range(len(dfsAnswer)):
+  if i < N-1:
+    print(dfsAnswer[i], end=' ')
+  else:
+    print(dfsAnswer[i])
+for i in range(len(bfsAnswer)):
+  if i < N-1:
+    print(bfsAnswer[i], end=' ')
+  else:
+    print(bfsAnswer[i])

@@ -5,21 +5,16 @@ dicNum = {}
 dicName = {}
 answer = []
 for i in range(N):
-  name = input()
+  name = input().rstrip()
   dicNum[i+1] = name
   dicName[name] = i+1
 for j in range(M):
-  inputStr = input()
+  inputStr = input().rstrip()
 
-  findByName = True
-  for s in inputStr:
-    if not s.isalpha():
-      findByName = False
-  
-  if findByName:
-    answer.append(dicName[i])
+  if inputStr.isnumeric():
+    answer.append(dicNum[int(inputStr)])
   else:
-    answer.append(dicNum[int(i)])
-    
+    answer.append(dicName[inputStr])
+     
 for a in answer:
   print(a)

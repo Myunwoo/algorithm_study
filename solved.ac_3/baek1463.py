@@ -1,28 +1,14 @@
-from collections import deque
+dp = [float('inf') for _ in range(1000001)]
 X = int(input())
-dq = deque()
-dq.append((X, 0))
-answer = float('inf')
 
-while dq:
-  curX, curCount = dq.popleft()
-  
-  if curX%3 == 0:
-    one = curX/3
-    if one > 1:
-      dq.append((one, curCount+1))
-    elif one == 1:
-      answer = min(answer,curCount+1)
-  if curX%2 == 0:
-    two = curX/2
-    if two > 1:
-      dq.append((two, curCount+1))
-    elif two == 1:
-      answer = min(answer,curCount+1)
-  if curX > 1:
-    three = curX-1
-    if three == 1:
-      answer = min(answer,curCount+1)
-    dq.append((three, curCount+1))
+dp[1] = 0
+for i in range(2, len(dp)):
+  arr = []
+  if i%3 == 0:
+    arr.append(dp[i//3]+1)
+  if i%2 == 0:
+    arr.append(dp[i//2]+1)
+  arr.append(dp[i-1]+1)
+  dp[i] = min(arr)
 
-print(answer)
+print(dp[X])

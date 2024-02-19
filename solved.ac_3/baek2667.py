@@ -6,21 +6,28 @@ graph = [list(input().rstrip()) for _ in range(N)]
 
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
-
-def dfs(graph, i, j, count):
-  graph[i][j] = '0'
-  for i in range(4):
-    newI = i + dx[i]
-    newJ = j + dy[i]
-    if 0 <= newI < N and 0 <= newJ < N and graph[newI][newJ] == '1':
-      dfs(graph, newI, newJ, count)
-      count += 1
-  return count
-
 answer = []
+count = 0
+
+def dfs(graph, i, j):
+  graph[i][j] = '0'
+  global count
+  count += 1
+  for k in range(4):
+    newI = i + dx[k]
+    newJ = j + dy[k]
+    if 0 <= newI < N and 0 <= newJ < N and graph[newI][newJ] == '1':
+      dfs(graph, newI, newJ)
+
+
 for i in range(N):
   for j in range(N):
     if graph[i][j] == '1':
-      answer.append(dfs(graph, i, j, 0))
+      count = 0
+      dfs(graph, i, j)
+      answer.append(count)
 
-print(answer)
+answer.sort()
+print(len(answer))
+for a in answer:
+  print(a)

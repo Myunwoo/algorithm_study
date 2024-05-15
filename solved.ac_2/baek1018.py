@@ -1,29 +1,27 @@
-n, m = map(int, input().split())
-board = []
-result = []
- 
-for _ in range(n):
-    board.append(input())
- 
-for i in range(n-7):
-    for j in range(m-7):
-        draw1 = 0
-        draw2 = 0
- 
-        for a in range(i, i+8):
-            for b in range(j, j+8):
-                if (a + b) % 2 == 0:
-                    if board[a][b] != 'B':
-                        draw1 += 1
-                    if board[a][b] != 'W':
-                        draw2 += 1
-                else:
-                    if board[a][b] != 'W':
-                        draw1 += 1
-                    if board[a][b] != 'B':
-                        draw2 += 1
- 
-        result.append(draw1)
-        result.append(draw2)
- 
-print(min(result))
+import sys
+input = sys.stdin.readline
+
+N, M = list(map(int, input().split()))
+graph = [list(input().strip()) for _ in range(N)]
+
+minCount = float('inf')
+
+for startN in range(N-7):
+  for startM in range(M-7):
+    countW, countB = 0, 0
+    for i in range(8):
+      for j in range(8):
+        s = i+j
+        if s % 2 == 0:
+          if graph[i+startN][j+startM] != 'W':
+            countW += 1
+          else:
+            countB += 1
+        else:
+          if graph[i+startN][j+startM] != 'B':
+            countW += 1
+          else:
+            countB += 1
+    minCount = min(minCount, countW, countB)
+
+print(minCount)

@@ -2,38 +2,37 @@ T = int(input())
 from collections import deque
 
 def bfs(A, B):
-    visited = [False for i in range(10001)]
+    visited = [False for _ in range(10001)]
     word = ''
     dq = deque()
     dq.append((A, word))
-    visited[int(A)] = True
+    visited[A] = True
     while dq:
         a, w = dq.popleft()
-        numA = int(a)
-        if numA == int(B):
+        if a == B:
             return w
         # D
-        d = (numA * 2) % 10000
+        d = (a * 2) % 10000
         if not visited[d]:
             visited[d] = True
-            dq.append((str(d), w+'D'))
+            dq.append((d, w+'D'))
         # S
-        s= (numA - 1) % 10000
-        if numA - 1 > 0 and not visited[s]:
+        s= (a - 1) % 10000
+        if a - 1 > 0 and not visited[s]:
             visited[s] = True
-            dq.append((str(s), w+'S'))
+            dq.append((s, w+'S'))
         # L
-        l = numA // 1000 + (numA % 1000)*10
+        l = a // 1000 + (a % 1000)*10
         if not visited[l]:
             visited[l] = True
-            dq.append((str(l), w+'L'))
+            dq.append((l, w+'L'))
         # R
-        r = numA // 10 + (numA % 10) * 1000
+        r = a // 10 + (a % 10) * 1000
         if not visited[r]:
             visited[r] = True
-            dq.append((str(r), w+'R'))
+            dq.append((r, w+'R'))
 
 
 for _ in range(T):
-    A, B = input().split()
+    A, B = map(int, input().split())
     print(bfs(A, B))

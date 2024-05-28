@@ -1,49 +1,30 @@
-import sys
-input = sys.stdin.readline
-from collections import deque
+from itertools import combinations
 
-N, M = map(int, input().strip().split())
-graph = [list(map(int, input().strip().split())) for _ in range(N)]
+N, M = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(N)]
 
-def bfs(i, j, target):
-    global N, graph
-    costs = [[float('inf') for _ in range(N)] for _ in range(N)]
-    dq = deque()
-    dn = [1, -1, 0, 0]
-    dm = [0, 0, 1, -1]
-    dq.append((i, j))
-    costs[i][j] = 0
-    totalCost = 0
-    while dq:
-        curN, curM = dq.popleft()
-        curCost = costs[curN][curM]
-        for i in range(4):
-            newN = curN + dn[i]
-            newM = curM + dm[i]
-            if 0<=newN<N and 0<=newM<N and costs[newN][newM] > curCost + 1:
-                dq.append((newN, newM))
-                costs[newN][newM] = curCost + 1
-                if graph[newN][newM] == target:
-                    totalCost += costs[newN][newM]
-                    if target == 2:
-                        return totalCost
-    return totalCost
+chickenArr = []
+houseArr = []
 
-chickens = []
-for i in range(N):
-    for j in range(N):
-        if graph[i][j] == 2:
-            chickens.append((bfs(i, j, 1), i, j))
-
-chickens.sort()
-for _ in range(len(chickens)-M):
-    cost, n, m = chickens.pop()
-    graph[n][m] = 0
-
-result = 0
 for i in range(N):
     for j in range(N):
         if graph[i][j] == 1:
-            result += bfs(i, j, 2)
+            houseArr.append((i, j))
+        elif graph[i][j] == 2:
+            chickenArr.append((i, j))
+
+# 치킨 가게 중 M개를 선택하는 경우
+combs = combinations(chickenArr, M)
+result = float('inf')
+for comb in combs:
+    chickenTotal = 0
+    # 치킨 가게 순회
+    for house in houseArr:
+        minLength = float('inf')
+        # 가장 가까운 치킨 가게 까지의 거리
+        for c in comb:
+            minLength = min(minLength, abs(house[0]-c[0]) + abs(house[1]-c[1]))
+        chickenTotal += minLength
+    result = min(result, chickenTotal)
 
 print(result)

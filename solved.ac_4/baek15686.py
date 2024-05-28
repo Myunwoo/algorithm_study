@@ -16,6 +16,8 @@ for i in range(N):
 # 치킨 가게 중 M개를 선택하는 경우
 combs = combinations(chickenArr, M)
 result = float('inf')
+
+# 현재 조합
 for comb in combs:
     chickenTotal = 0
     # 치킨 가게 순회

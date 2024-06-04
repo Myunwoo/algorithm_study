@@ -21,6 +21,7 @@ def dijkstra(s):
         dist, cur = heapq.heappop(heap)
         # cur과 연결된 노드로의 이동
         for target, val in graph[cur]:
+            # 현재까지 조사된 target으로 이동하는 비용보다, cur노드에서 target으로 이동하는 비용이 작을 때
             if dist+val < visited[target]:
                 visited[target] = dist+val
                 heapq.heappush(heap, (visited[target], target))

@@ -1,21 +1,38 @@
 import sys
 input = sys.stdin.readline
-from collections import deque
+import heapq
 
 N, M, X = map(int, input().strip().split())
-graph = [[float('inf') for _ in range(N)] for _ in range(N)]
+graph = [[] for _ in range(N)]
+distance = [float('inf') for _ in range(N)]
 
 for _ in range(M):
     start, end, time = map(int, input().strip().split())
-    graph[start-1][end-1] = time
+    graph[start-1].append([end-1, time])
 
 def dijkstra(s):
-    tempGraph = [[float('inf') for _ in range(N)] for _ in range(N)]
-    dq = deque()
-    dq.append(s-1)
-    tempGraph[s-1][s-1] = 0
-    while dq:
-        cur = dq.popleft()
-        curCost = temp
-        for i in range(len(graph[i])):
-            if graph[i] != float('inf'):
+    visited = [float('inf') for _ in range(N)]
+    heap = []
+    heapq.heappush(heap, (0, s))
+    visited[s] = 0
+
+    while heap:
+        # 현재 노드 cur, cur까지 오는 비용 dist
+        dist, cur = heapq.heappop(heap)
+        # cur과 연결된 노드로의 이동
+        for target, val in graph[cur]:
+            if dist+val < visited[target]:
+                visited[target] = dist+val
+                heapq.heappush(heap, (visited[target], target))
+    return visited
+
+arr = dijkstra(X-1)
+dic = {}
+for i in range(N):
+    dic[i] = arr[i]
+
+result = -1
+for i in range(N):
+    if i != X-1:
+        result = max(result, dic[i]+dijkstra(i)[X-1])     
+print(result)

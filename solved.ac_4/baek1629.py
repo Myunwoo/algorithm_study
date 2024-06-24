@@ -1,4 +1,13 @@
-A, B, C = map(int, input().split())
+import sys
+a,b,c = map(int,sys.stdin.readline().split())
 
-arr = [A**i%C for i in range(1, 11)]
-print(arr[C%10])
+def multi (a,n):
+    if n == 1:
+        return a%c
+    else:
+        tmp = multi(a,n//2)
+        if n %2 ==0:
+            return (tmp * tmp) % c
+        else:
+            return (tmp  * tmp *a) % c
+print(multi(a,b))

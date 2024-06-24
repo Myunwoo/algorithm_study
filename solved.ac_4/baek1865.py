@@ -16,7 +16,7 @@ def bfs(graph, start):
             if graph[curPos][i] < sys.maxsize and (graph[curPos][i] + curCost) < visited[i]:
                 visited[i] = graph[curPos][i] + curCost
                 dq.append((i, visited[i]))
-                # 웜홀은 한 번 지나갈 수 있게
+                # 웜홀은 한 번 지나면 삭제
                 if graph[curPos][i] < 0:
                     graph[curPos][i] = sys.maxsize
     return visited

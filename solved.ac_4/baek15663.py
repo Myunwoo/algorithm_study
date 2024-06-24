@@ -1,10 +1,20 @@
-from itertools import permutations
+def solution():
+    check = 0
+    if len(answer) == m:
+        print(*answer)
+        return
+    for i in range(n):
+        if check != num[i] and visited[i] == 0:
+            answer.append(num[i])
+            visited[i] = 1
+            check = num[i]
+            solution()
+            answer.pop()
+            visited[i] = 0
 
-N, M = map(int, input().split())
-nums = list(input().split())
 
-result = list(set(list(permutations(nums, M))))
-result.sort()
-
-for r in result:
-    print(' '.join(r))
+n, m = map(int, input().split())
+num = sorted(list(map(int, input().split())))
+visited = [0] * n
+answer = []
+solution()

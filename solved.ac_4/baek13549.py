@@ -1,36 +1,21 @@
 import sys
 from collections import deque
 input = sys.stdin.readline
- 
+
 a,b = map(int,input().split())
-limit = 100001
-time = [0]*limit
- 
-def bfs(x,y):
-    q = deque()
-    if x == 0 :
-        q.append(1)
-    else :
-        q.append(x)
-    
-    while q:
-        x = q.popleft()
-        if y == x :
-            return time[x]
-        
-        for nx in (x-1,x+1,x*2):
-            if 0 <= nx < limit and time[nx]==0:
-                if nx == 2*x :
-                    time[nx] = time[x]
-                    q.appendleft(nx)
-                else : 
-                    time[nx] = time[x] + 1
-                    q.append(nx)
- 
-if a==0:
-    if b==0:
-        print(0)
-    else:
-        print(bfs(a,b)+1)
-else :
-    print(bfs(a,b))
+dq = deque()
+dq.append(a)
+costs = [sys.maxsize for _ in range(100001)]
+costs[a] = 0
+
+while dq:
+    curA = dq.popleft()
+    for nxtA in (curA*2, curA+1, curA-1):
+        if 0 <= nxtA < 100001:
+            if nxtA == curA*2 and costs[nxtA] > costs[curA]:
+                costs[nxtA] = costs[curA]
+                dq.append(nxtA)
+            elif (nxtA == curA+1 or nxtA == curA-1) and costs[nxtA] > costs[curA] + 1:
+                costs[nxtA] = costs[curA] + 1
+                dq.append(nxtA)
+print(costs[b])

@@ -3,12 +3,10 @@ import sys
 H,W=map(int, sys.stdin.readline().split())
 blocks=list(map(int, sys.stdin.readline().strip().split()))
 
-result=0
-for i in range(1,W-1):
-    leftMax=max(blocks[:i])
-    rightMax=max(blocks[i+1:])
-    m=min(leftMax,rightMax)
-    if m>blocks[i]:
-        result+=m-blocks[i]
-    
+result = 0
+
+for i in range(1, len(blocks)-1):
+    target = min(max(blocks[:i]), max(blocks[i+1:]))
+    result += target-blocks[i] if target > blocks[i] else 0
+
 print(result)

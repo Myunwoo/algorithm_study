@@ -10,3 +10,4 @@ def solution(routes):
             answer += 1
             
     return answer
+    

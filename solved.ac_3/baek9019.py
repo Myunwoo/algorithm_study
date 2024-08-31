@@ -3,9 +3,8 @@ from collections import deque
 
 def bfs(A, B):
     visited = [False for _ in range(10001)]
-    word = ''
     dq = deque()
-    dq.append((A, word))
+    dq.append((A, ''))
     visited[A] = True
     while dq:
         a, w = dq.popleft()
@@ -17,8 +16,8 @@ def bfs(A, B):
             visited[d] = True
             dq.append((d, w+'D'))
         # S
-        s= (a - 1) % 10000
-        if a - 1 > 0 and not visited[s]:
+        s = (a-1) if a > 0 else 9999
+        if not visited[s]:
             visited[s] = True
             dq.append((s, w+'S'))
         # L

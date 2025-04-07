@@ -1,0 +1,1 @@
+S = int(input())

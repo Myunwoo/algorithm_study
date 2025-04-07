@@ -15,6 +15,6 @@ for j in range(M):
     answer.append(dicNum[int(inputStr)])
   else:
     answer.append(dicName[inputStr])
-     
+
 for a in answer:
   print(a)

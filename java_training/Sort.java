@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Collections;
 
-public class programmers12933 {
+public class Sort {
     public long solution(long n) {
         String answerStr = "";
     

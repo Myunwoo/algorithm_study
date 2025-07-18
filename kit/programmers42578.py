@@ -15,3 +15,18 @@ def solution(clothes):
         answer *= (a + 1)
     
     return answer - 1
+
+def solution(clothes):
+    hashMap = {}
+    answer = 1
+    
+    for name, kind in clothes:
+        if kind in hashMap:
+            hashMap[kind] += 1
+        else:
+            hashMap[kind] = 1
+
+    for key in hashMap:
+        answer *= hashMap[key] + 1
+    
+    return answer - 1

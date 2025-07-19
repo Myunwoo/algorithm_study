@@ -1,14 +1,12 @@
 def solution(s):
-    answer = True
-    stack = []
-    
-    for ss in s:
-        if ss == '(':
-            stack.append('(')
+    count = 0
+    for i in range(len(s)):
+        if s[i] == '(':
+            count += 1
         else:
-            if stack:
-                stack.pop()
+            if count > 0:
+                count -= 1
             else:
-                answer = False
-                break
-    return False if stack else answer
+                return False
+    
+    return False if count > 0 else True

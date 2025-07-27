@@ -1,19 +1,25 @@
+
 def solution(n, lost, reserve):
-    # 변수의 재사용에 대해 고민좀 할 것.
+    # lost, reserver 여분이 있지만 도둑맞은 학생을 고려해서 새로운 배열을 만든다.    
     real_lost = sorted([l for l in lost if l not in reserve])
     real_reserve = sorted([r for r in reserve if r not in lost])
-    count = 0
-
-    lostMap = {l: True for l in real_lost}
-
+    
+    lostMap = {}
+    for l in real_lost:
+        lostMap[l] = True
+    
     for r in real_reserve:
-        if r - 1 in lostMap and lostMap[r - 1]:
-            lostMap[r - 1] = False
+        if r-1 in lostMap and lostMap[r-1]:
+            lostMap[r-1] = False
+        elif r+1 in lostMap and lostMap[r+1]:
+            lostMap[r+1] = False
+    
+    count = 0
+    for l in lostMap:
+        if lostMap[l]:
             count += 1
-            continue
+            
+    
+    return n - count
 
-        if r + 1 in lostMap and lostMap[r + 1]:
-            lostMap[r + 1] = False
-            count += 1
 
-    return n - len(real_lost) + count

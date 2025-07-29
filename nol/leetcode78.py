@@ -1,13 +1,11 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        answer = []
+        result = [[]]  # 빈 집합 포함
 
-        def backtrack(start, cur):
-            answer.append(cur[:])  # 부분 집합 저장
-            for i in range(start, len(nums)):
-                cur.append(nums[i])
-                backtrack(i + 1, cur)
-                cur.pop()
+        for num in nums:
+            new_subsets = []
+            for subset in result:
+                new_subsets.append(subset + [num])
+            result += new_subsets
         
-        backtrack(0, [])
-        return answer
+        return result

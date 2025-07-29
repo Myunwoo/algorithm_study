@@ -1,13 +1,32 @@
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
-        rev = None
+        if not head:
+            return head
+        
         slow = fast = head
-        while fast and fast.next:
-            fast = fast.next.next
-            rev, rev.next, slow = slow, rev, slow.next
-        if fast:
+        while fast.next and fast.next.next:
             slow = slow.next
+            fast = fast.next.next
+        
+        rightHead = None
+        if fast.next:
+            fast = fast.next
+            rightHead = slow.next
+        else:
+            rightHead = slow
+        
+        # rightHead 부터 끝에 이르기까지 링크드리스트를 뒤집는다.
+        prev = None
+        while rightHead:
+            cur = rightHead
+            rightHead = cur.next
+            cur.next = prev
+            prev = cur
 
-        while rev and rev.val == slow.val:
-            slow, rev = slow.next, rev.next
-        return not rev
+        while head and prev:
+            if head.val != prev.val:
+                return False
+            head = head.next
+            prev = prev.next
+
+        return True

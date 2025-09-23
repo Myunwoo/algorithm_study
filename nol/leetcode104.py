@@ -8,16 +8,15 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        
-        def traverse(node, depth):
-            if not node.left and not node.right:
-                return depth
 
-            ld, rd = 0, 0
-            if node.left:
-                ld = traverse(node.left, depth+1)
-            if node.right:
-                rd = traverse(node.right, depth+1)
-            return max(ld, rd)
+        def countDepth(root, count):
+            if not root.left and not root.right:
+                return count
+            l, r = 0, 0
+            if root.left:
+                l = countDepth(root.left, count+1)
+            if root.right:
+                r = countDepth(root.right, count+1)
+            return max(l, r)
         
-        return traverse(root, 1)
+        return countDepth(root, 1)

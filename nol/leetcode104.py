@@ -19,4 +19,10 @@ class Solution:
                 r = countDepth(root.right, count+1)
             return max(l, r)
         
+        def traverse(node, curDepth):
+            if not node:
+                return curDepth - 1
+
+            return max(traverse(node.left, curDepth+1), traverse(node.right, curDepth+1))
+        
         return countDepth(root, 1)

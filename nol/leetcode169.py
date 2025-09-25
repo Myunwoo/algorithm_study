@@ -1,37 +1,18 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        target = len(nums)//2
-        answer = -1
-        dic = {}
-
-        for num in nums:
-            if num not in dic:
-                dic[num] = 1
-            else:
-                dic[num] += 1
-            
-            if dic[num] > target:
-                answer = num
-                break
-
-        return answer
-    
-
-
-class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
-
-        ansArr = [nums[0], 1]
+        hash = {}
+        curNum = nums[0]
+        hash[nums[0]] = 1
 
         for i in range(1, len(nums)):
-            if nums[i] == ansArr[0]:
-                ansArr[1] += 1
+            n = nums[i]
+            if n in hash:
+                hash[n] += 1
             else:
-                ansArr[1] -= 1
-                if ansArr[1] == 0:
-                    ansArr[0] = nums[i]
-                    ansArr[1] = 1
-        
-        return ansArr[0]
+                hash[curNum] -= 1
+                if hash[curNum] == -1:
+                    del hash[curNum]
+                    curNum = n
+                    hash[curNum] = 1
+            print(hash)
+        return curNum

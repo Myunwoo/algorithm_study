@@ -9,8 +9,7 @@ class Solution:
                 hash[n] = 1
         
         for n in nums2:
-            if n in hash and hash[n] > 0:
+            if n in hash and hash[n]:
                 answer.append(n)
                 hash[n] -= 1
-        
         return answer

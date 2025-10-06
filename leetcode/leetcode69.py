@@ -33,3 +33,15 @@ def mySqrt(self, x: int) -> int:
                 right = mid - 1
 
         return right  # 반복문 종료 시 right가 정답 (가장 큰 제곱근)
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x == 0:
+            return 0
+
+        for i in range(1,x+1):
+            v = i * i
+            if v > x:
+                return i - 1
+            elif v == x:
+                return i

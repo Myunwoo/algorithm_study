@@ -14,3 +14,19 @@ class Solution:
                 answer.append(intervals[i])
         
         return answer
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x:[x[0], -x[1]])
+        
+        idx = 0
+
+        while idx < len(intervals) - 1:
+            if intervals[idx][1] >= intervals[idx+1][0]:
+                intervals[idx+1] = [min(intervals[idx][0], intervals[idx+1][0]), max(intervals[idx][1], intervals[idx+1][1])]
+                intervals.remove(intervals[idx])
+            else:
+                idx += 1
+        
+        return intervals
+                

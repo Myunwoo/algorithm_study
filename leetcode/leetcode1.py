@@ -11,6 +11,16 @@ class Solution:
     
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hash = {}
+
+        for i in range(len(nums)):
+            if target - nums[i] in hash:
+                return [hash[target - nums[i]], i]
+            hash[nums[i]] = i
+            
+    
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
         l, r = 0, len(nums)-1
         for i in range(len(nums)):
             nums[i] = [nums[i], i]

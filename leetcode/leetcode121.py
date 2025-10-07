@@ -7,3 +7,14 @@ class Solution:
             m = min(m, prices[i])
             answer = max(answer, prices[i] - m)
         return answer
+
+import sys
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        curMin = sys.maxsize
+        answer = -sys.maxsize
+        for p in prices:
+            curMin = min(curMin, p)
+            answer = max(answer, p-curMin)
+        
+        return answer

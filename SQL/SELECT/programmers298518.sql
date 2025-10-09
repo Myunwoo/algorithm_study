@@ -1,0 +1,22 @@
+SELECT
+    COUNT(*) AS FISH_COUNT
+FROM
+    FISH_INFO AS fi
+INNER JOIN
+    FISH_NAME_INFO AS fni
+ON
+    fi.FISH_TYPE = fni.FISH_TYPE
+WHERE
+    fni.FISH_NAME in ('BASS', 'SNAPPER')
+
+
+# 불필요 조인 수를 감소시키기 위해 아래와 같이 작성 가능
+
+SELECT COUNT(*) AS FISH_COUNT
+FROM FISH_INFO fi
+WHERE fi.FISH_TYPE IN (
+  SELECT fni.FISH_TYPE
+  FROM FISH_NAME_INFO fni
+  WHERE fni.FISH_TYPE = fi.FISH_TYPE
+    AND fni.FISH_NAME IN ('BASS', 'SNAPPER')
+);

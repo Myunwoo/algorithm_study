@@ -14,3 +14,41 @@ WHERE
     )
 ORDER BY
     ITEM_ID DESC
+
+
+
+
+SELECT
+    ITEM_ID, ITEM_NAME, RARITY
+FROM
+    ITEM_INFO
+WHERE
+    ITEM_ID in (
+        SELECT
+            DISTINCT it.ITEM_ID AS ITEM_ID
+        FROM
+            ITEM_INFO AS ii
+        INNER JOIN
+            ITEM_TREE AS it
+        ON
+            ii.ITEM_ID = it.PARENT_ITEM_ID
+        WHERE
+            it.PARENT_ITEM_ID IS NOT NULL
+            AND ii.RARITY = 'RARE'
+    )
+ORDER BY
+    ITEM_ID DESC
+
+
+# 지피티 답변
+SELECT i.ITEM_ID, i.ITEM_NAME, i.RARITY
+FROM ITEM_INFO i
+WHERE EXISTS (
+  SELECT 1
+  FROM ITEM_TREE t
+  JOIN ITEM_INFO p
+    ON p.ITEM_ID = t.PARENT_ITEM_ID
+   AND p.RARITY = 'RARE'
+  WHERE t.ITEM_ID = i.ITEM_ID
+)
+ORDER BY i.ITEM_ID DESC;

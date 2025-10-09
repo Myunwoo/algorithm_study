@@ -1,13 +1,13 @@
 SELECT
-    a.FLAVOR
+    fh.FLAVOR as FLAVOR
 FROM
-    FIRST_HALF as a
+    FIRST_HALF as fh
 INNER JOIN
-    ICECREAM_INFO as b
+    ICECREAM_INFO as ii
 ON
-    a.FLAVOR = b.FLAVOR
+    fh.FLAVOR = ii.FLAVOR
 WHERE
-    a.TOTAL_ORDER > 3000
-    AND b.INGREDIENT_TYPE = 'fruit_based'
+    fh.TOTAL_ORDER >= 3000
+    AND ii.INGREDIENT_TYPE = 'fruit_based'
 ORDER BY
-    a.TOTAL_ORDER DESC;
+    fh.TOTAL_ORDER DESC

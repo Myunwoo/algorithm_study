@@ -1,0 +1,15 @@
+WITH AVG_INFO AS (
+    SELECT
+        ID,
+        IFNULL(LENGTH, 10) AS LENGTH
+    FROM
+        FISH_INFO
+)
+SELECT
+    ROUND(AVG(LENGTH), 2) AS AVERAGE_LENGTH
+FROM
+    AVG_INFO
+
+# WITH 까지 쓸 필요는 없다.
+select round(avg(ifnull(LENGTH,10)),2) as AVERAGE_LENGTH
+from FISH_INFO

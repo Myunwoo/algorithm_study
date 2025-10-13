@@ -1,0 +1,24 @@
+SELECT
+    a.APNT_NO,
+    p.PT_NAME,
+    p.PT_NO,
+    a.MCDP_CD,
+    d.DR_NAME,
+    a.APNT_YMD
+FROM
+    APPOINTMENT AS a
+INNER JOIN
+    PATIENT AS p
+ON
+    a.PT_NO = p.PT_NO
+INNER JOIN
+    DOCTOR AS d
+ON
+    a.MDDR_ID = d.DR_ID
+WHERE
+    1=1
+    AND a.APNT_CNCL_YN = 'N'
+    AND a.MCDP_CD = 'CS'
+    AND a.APNT_YMD LIKE '2022-04-13%'
+ORDER BY
+    a.APNT_YMD

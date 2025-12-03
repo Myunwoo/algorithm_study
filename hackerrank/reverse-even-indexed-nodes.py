@@ -27,3 +27,5 @@ def extractAndAppendSponsoredNodes(head):
     
     oddTail.next = evenHead
     return oddHead
+
+# dummy head, tail을 종류별로 관리하는 아이디어

@@ -1,8 +1,7 @@
-# Write your MySQL query statement below
-select
+SELECT
     product_id
-from
+FROM
     Products
-where 1=1
-    and low_fats = 'Y'
-    and recyclable = 'Y'
+WHERE 1=1
+    AND low_fats = 'Y'
+    AND recyclable = 'Y'

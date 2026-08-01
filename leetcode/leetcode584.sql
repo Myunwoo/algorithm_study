@@ -1,7 +1,7 @@
-select
+SELECT
     name
-from
+FROM
     Customer
-where 1=1
-    and referee_id is null
-    or referee_id != 2
+WHERE 1=1
+    AND referee_id IS NULL
+    OR referee_id != 2

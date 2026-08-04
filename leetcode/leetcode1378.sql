@@ -5,5 +5,4 @@ FROM
     Employees a1
 LEFT JOIN
     EmployeeUNI a2
-ON
-    a1.id = a2.id
+ON a1.id = a2.id

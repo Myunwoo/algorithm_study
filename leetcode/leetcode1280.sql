@@ -1,8 +1,8 @@
 SELECT
-    a1.student_id
-    , a1.student_name
-    , a2.subject_name
-    , COUNT(a3.student_id) as attended_exams
+    a1.student_id AS student_id
+    , a1.student_name AS student_name
+    , a2.subject_name AS subject_name
+    , COUNT(a3.student_id) AS attended_exams
 FROM
     Students a1
 CROSS JOIN
@@ -14,7 +14,6 @@ ON
     AND a2.subject_name = a3.subject_name
 GROUP BY
     a1.student_id
-    , a1.student_name
     , a2.subject_name
 ORDER BY
     student_id

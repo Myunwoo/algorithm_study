@@ -1,6 +1,6 @@
 SELECT
-    a1.project_id
-    , ROUND(AVG(a2.experience_years), 2) as average_years
+    a1.project_id AS project_id
+    , ROUND(AVG(a2.experience_years), 2) AS average_years
 FROM
     Project a1
 JOIN

@@ -6,7 +6,7 @@ SELECT
 FROM
     Cinema
 WHERE 1=1
-    AND description != "boring"
-    AND id % 2 = 1
+    AND id % 2 != 0
+    AND description != 'boring'
 ORDER BY
     rating DESC

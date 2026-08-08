@@ -1,7 +1,6 @@
 SELECT
     teacher_id
-    , COUNT(DISTINCT subject_id) as cnt
+    , COUNT(DISTINCT subject_id) AS cnt
 FROM
     Teacher
-GROUP BY
-    teacher_id
+GROUP BY teacher_id

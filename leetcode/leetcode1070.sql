@@ -1,21 +1,19 @@
--- 상품별 첫 판매 연도의 판매 정
-
 SELECT
     a1.product_id
     , a2.min_year AS first_year
-    , a1.quantity
+    , a1.quantity 
     , a1.price
 FROM
     Sales a1
 JOIN (
     SELECT
-        product_id
-        , MIN(year) AS min_year
+        b1.product_id
+        , MIN(b1.year) AS min_year
     FROM
-        Sales
+        Sales b1
     GROUP BY
-        product_id
+        b1.product_id
 ) a2
 ON
-    a1.year = a2.min_year
-    AND a1.product_id = a2.product_id
+    a1.product_id = a2.product_id
+    AND a1.year = a2.min_year
